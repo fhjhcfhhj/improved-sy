@@ -216,14 +216,14 @@ function Fenglib:CreateWindow(Config)
     local MainFrame = Instance.new("Frame")
 MainFrame.Size = UDim2.new(0, 0, 0, 0) 
 MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.AnchorPoint = Vector2(0.5, 0.5)
 MainFrame.ClipsDescendants = false
 MainFrame.BackgroundTransparency = 1
 MainFrame.Parent = ScreenGui
 Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 14)
 AddToRegistry(MainFrame, "BackgroundColor3", "Main")
 
--- 你要的图片背景（已就位）
+-- 你要的背景图：91450721465201
 local bg = Instance.new("ImageLabel")
 bg.Size = UDim2.new(1,0,1,0)
 bg.BackgroundTransparency = 1
@@ -235,7 +235,6 @@ local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0,14)
 corner.Parent = bg
 
--- 黑色半透明层（让文字更清晰）
 local mask = Instance.new("Frame")
 mask.Size = UDim2.new(1,0,1,0)
 mask.BackgroundTransparency = 0.5
