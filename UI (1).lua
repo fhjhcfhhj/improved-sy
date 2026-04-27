@@ -214,28 +214,16 @@ function Fenglib:CreateWindow(Config)
     HolderPadding.Parent = NotificationHolder
 
     local bg = Instance.new("ImageLabel")
- bg.Size = UDim2.new(1,0,1,0)
- bg.BackgroundTransparency = 1
- bg.Image = "rbxassetid://91450721465201"
- bg.ScaleType = Enum.ScaleType.Cover
- bg.ZIndex = -1
- bg.Parent = MainFrame
- local corner = Instance.new("UICorner")
- corner.CornerRadius = UDim.new(0,14)
- corner.Parent = bg
- local mask = Instance.new("Frame")
- mask.Size = UDim2.new(1,0,1,0)
- mask.BackgroundTransparency = 0.5
- mask.BackgroundColor3 = Color3.new(0,0,0)
- mask.ZIndex = 0
- mask.Parent = MainFrame
- local maskCorner = Instance.new("UICorner")
- maskCorner.CornerRadius = UDim.new(0,14)
- maskCorner.Parent = mask
- local Stroke = Instance.new("UIStroke")
- Stroke.Thickness = 2
- Stroke.Parent = MainFrame
- AddToRegistry(Stroke, "Color", "Stroke")
+bg.Size = UDim2.new(1,0,1,0)
+bg.BackgroundTransparency = 1
+bg.Image = "rbxassetid://91450721465201"
+bg.ScaleType = Enum.ScaleType.Cover
+bg.ZIndex = -1
+bg.Parent = MainFrame
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0,14)
+corner.Parent = bg
+
 
     local Gradient = Instance.new("UIGradient")
     Gradient.Parent = Stroke
