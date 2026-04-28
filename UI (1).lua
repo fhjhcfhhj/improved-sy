@@ -214,43 +214,19 @@ function Fenglib:CreateWindow(Config)
     HolderPadding.Parent = NotificationHolder
 
     local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 0, 0, 0) 
-MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.ClipsDescendants = false
-MainFrame.BackgroundTransparency = 1
-MainFrame.Parent = ScreenGui
-Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 14)
-AddToRegistry(MainFrame, "BackgroundColor3", "Main")
+    MainFrame.Size = UDim2.new(0, 0, 0, 0) 
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.ClipsDescendants = false
+    MainFrame.BackgroundTransparency = 0.05
+    MainFrame.Parent = ScreenGui
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 14)
+    AddToRegistry(MainFrame, "BackgroundColor3", "Main")
 
--- 背景图片
-local bg = Instance.new("ImageLabel")
-bg.Size = UDim2.new(1,0,1,0)
-bg.BackgroundTransparency = 1
-bg.Image = "rbxassetid://91450721465201"
-bg.ScaleType = Enum.ScaleType.Cover
-bg.ZIndex = -1
-bg.Parent = MainFrame
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0,14)
-corner.Parent = bg
-
--- 黑色遮罩（让文字看得清）
-local mask = Instance.new("Frame")
-mask.Size = UDim2.new(1,0,1,0)
-mask.BackgroundColor3 = Color3.new(0,0,0)
-mask.BackgroundTransparency = 0.5
-mask.ZIndex = 0
-mask.Parent = MainFrame
-local maskCorner = Instance.new("UICorner")
-maskCorner.CornerRadius = UDim.new(0,14)
-maskCorner.Parent = mask
-
-local Stroke = Instance.new("UIStroke")
-Stroke.Thickness = 2
-Stroke.Parent = MainFrame
-AddToRegistry(Stroke, "Color", "Stroke")
-
+    local Stroke = Instance.new("UIStroke")
+    Stroke.Thickness = 2
+    Stroke.Parent = MainFrame
+    AddToRegistry(Stroke, "Color", "Stroke")
 
     local Gradient = Instance.new("UIGradient")
     Gradient.Parent = Stroke
