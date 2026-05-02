@@ -64,7 +64,7 @@ TextLabel.BorderColor3 = Color3.fromRGB(100, 0, 50)
 TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
 TextLabel.Size = UDim2.new(0, 100, 0, 28)
 TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "殺飞行"
+TextLabel.Text = "番飞行"
 TextLabel.TextColor3 = Color3.fromRGB(255, 100, 150)
 TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
@@ -160,7 +160,7 @@ local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 nowe = false
 
 game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "殺脚本";
+	Title = "番脚本";
 	Text = "已为您开启飞行";
 	Icon = "rbxthumb://87032069041923"})
 Duration = 5;
