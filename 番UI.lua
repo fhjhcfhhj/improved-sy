@@ -1023,7 +1023,7 @@ function Fenglib:CreateWindow(Config)
     OpenButton.Size = UDim2.new(0, 40, 0, 40)
     OpenButton.Active = true
     OpenButton.Draggable = true
-    OpenButton.Image = "rbxassetid://12112277927061"
+    OpenButton.Image = "rbxassetid://121122779270617"
     OpenButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
     OpenButton.ImageTransparency = 0.15
     OpenButton.ZIndex = 10
