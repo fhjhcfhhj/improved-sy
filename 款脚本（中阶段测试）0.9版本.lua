@@ -6,7 +6,7 @@ local Window = library:CreateWindow({
     Keybind = Enum.KeyCode.RightShift,
     Icon = 80732857736726,
     Theme = "Dark",
-    Background = "https://chaton-images.s3.us-east-2.amazonaws.com/micukdwtowvsAv8eAdo2D68qnow9VjFVwxrC2zRbfMDCkrnu9numMrK66AGZvmAP_1798x810x147337.jpeg"
+    Background = "https://chaton-images.s3.us-east-2.amazonaws.com/Qx7Aun30ZRPmlXtXDE3adbBleR5buvwp8AbOFCoIU5TugqRw62Dn00B4rBtx00Vx_1578x932x261816.jpeg"
 })
 
 local Players = game:GetService("Players")
@@ -15,7 +15,7 @@ local UserInputService = game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
 
 local tabProfile = Window:Tab("资料库", "85887401411044")
-local sectionProfile = tabProfile:Section("款脚本身份", {Y = "92821030240115", F = "92821030240115"}, true)
+local sectionProfile = tabProfile:Section("款脚本身份", {Y = "94054854845750", F = "94054854845750"}, true)
 
 sectionProfile:Image({
     Title = "付款",
@@ -32,12 +32,12 @@ sectionProfile:Image({
 sectionProfile:Image({
     Title = "中皮",
     Subtitle = "款脚本副作者",
-    Description = {"身份：", "脚", "脚本副群1094790583"},
-    Icon = "rbxassetid://125810852185092",
+    Description = {"身份：脚本哥", "无", "无"},
+    Icon = "rbxassetid://83204773411249",
     IconColor = Color3.fromRGB(255, 255, 255),
     StrokeColor = Color3.fromRGB(255, 215, 0),
     Callback = function()
-        Window:Notification("提示", "你点击了殺脚本作者的资料", "Info", 2)
+        Window:Notification("提示", "你点击了中皮的资料", "Info", 2)
     end
 })
 
@@ -50,6 +50,18 @@ sectionProfile:Image({
     StrokeColor = Color3.fromRGB(255, 215, 0),
     Callback = function()
         Window:Notification("提示", "你点击了殺脚本作者的资料", "Info", 2)
+    end
+})
+
+sectionProfile:Image({
+    Title = "小番",
+    Subtitle = "管理员",
+    Description = {"身份：番茄🍅", "小番牛逼", "xfnb666"},
+    Icon = "rbxassetid://138242046027117",
+    IconColor = Color3.fromRGB(255, 255, 255),
+    StrokeColor = Color3.fromRGB(255, 215, 0),
+    Callback = function()
+        Window:Notification("提示", "你点击了小番的资料", "Info", 2)
     end
 })
 
@@ -207,16 +219,59 @@ sectionCommon:Toggle("无限跳", false, function(state)
     end
 end)
 
+sectionCommon:Button("自杀", function()
+    game.Players.LocalPlayer.Character.Humanoid.Health=0
+end)
+
 sectionCommon:Toggle("无敌（可能会失效）", false, function(state)
     loadstring(game:HttpGet('https://pastebin.com/raw/nwGEvkez'))()
 end)
 
-sectionCommon:Button("旋转（甩飞）", function()
+sectionCommon:Button("踏空行走", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
+end)
+sectionCommon:Button("视角可提超广角", function()
+    Workspace.CurrentCamera.FieldOfView = 100
+end)
+
+sectionCommon:Button("铁拳", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'))()
+end)
+
+sectionCommon:Button("旋转", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/tt/main/%E6%97%8B%E8%BD%AC.lua"))()
 end)
 
-local tabEntertainment = Window:Tab("娱乐", "80732857736726")
-local sectionEntertainment = tabEntertainment:Section("娱乐功能", {Y = "80732857736726", F = "80732857736726"}, true)
+sectionCommon:Toggle("反挂机", false, function(state)
+     loadstring(game:HttpGet("https://pastebin.com/raw/9fFu43FF"))()
+end)
+
+local tabCommon = Window:Tab("娱乐（FE）", "117911709021357")
+local sectionCommon = tabCommon:Section("娱乐功能", {Y = "113580079129703", F = "113580079129703"}, true)
+
+sectionCommon:Button("打人", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-THE-REAL-dropkick-177199"))() 
+end)
+
+sectionCommon:Button("SCP-096", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-SCP-096-36948"))()
+end)
+
+sectionCommon:Button("变车", function()
+    loadstring(game:HttpGet("https://pastefy.app/UqDEIOpO/raw"))()
+end)
+
+sectionCommon:Button("撸管R15", function()
+    loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+end)
+
+sectionCommon:Button("撸管R6", function()
+    loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+end)
+
+sectionCommon:Button("飞檐走壁", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+end)
 
 local tabConfig = Window:Tab("配置管理")
 local sectionConfig = tabConfig:Section("配置设置")
