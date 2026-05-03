@@ -199,6 +199,12 @@ sectionFun:Button("打人", function()
     end)
 end)
 
+sectionCommon:Button("M47", function()
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/ak47", true))()
+    end)
+end)
+
 sectionFun:Button("SCP-096", function()
     pcall(function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-SCP-096-36948"))()
