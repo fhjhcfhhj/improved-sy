@@ -116,8 +116,136 @@ sectionProfile:Image({
 local tabCommon = Window:Tab("通用", "85043685370431")
 local sectionCommon = tabCommon:Section("通用功能", {Y = "127278444393372", F = "127278444393372"}, true)
 
+-- ===== 新增功能变量 =====
+local aimEnabled = false
+local speedEnabled = false
+local speedValue = 16
+local jumpEnabled = false
+local jumpValue = 50
+
+-- 用于统一管理的 Heartbeat 循环
+local featureHeartbeat = nil
+
+local function updateFeatureHeartbeat()
+    local needLoop = aimEnabled or speedEnabled or jumpEnabled
+    if needLoop and not featureHeartbeat then
+        featureHeartbeat = RunService.Heartbeat:Connect(function()
+            local char = LocalPlayer.Character
+            if not char then return end
+            local humanoid = char:FindFirstChildOfClass("Humanoid")
+            if not humanoid then return end
+            local root = char:FindFirstChild("HumanoidRootPart")
+            if not root then return end
+
+            -- 自瞄：看向最近玩家的头部
+            if aimEnabled then
+                local nearestHead = nil
+                local nearestDist = math.huge
+                for _, player in ipairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer then
+                        local otherChar = player.Character
+                        if otherChar then
+                            local head = otherChar:FindFirstChild("Head")
+                            if head then
+                                local dist = (root.Position - head.Position).Magnitude
+                                if dist < nearestDist then
+                                    nearestDist = dist
+                                    nearestHead = head
+                                end
+                            end
+                        end
+                    end
+                end
+                if nearestHead then
+                    -- 平滑转向，避免抖动
+                    local lookPos = nearestHead.Position
+                    root.CFrame = CFrame.lookAt(root.Position, Vector3.new(lookPos.X, root.Position.Y, lookPos.Z))
+                end
+            end
+
+            -- 自定义速度
+            if speedEnabled then
+                humanoid.WalkSpeed = speedValue
+            else
+                humanoid.WalkSpeed = 16  -- 恢复默认
+            end
+
+            -- 自定义跳跃高度
+            if jumpEnabled then
+                humanoid.JumpPower = jumpValue
+            else
+                humanoid.JumpPower = 50  -- 恢复默认
+            end
+        end)
+    elseif not needLoop and featureHeartbeat then
+        featureHeartbeat:Disconnect()
+        featureHeartbeat = nil
+        -- 关闭循环后立刻恢复默认值
+        local char = LocalPlayer.Character
+        if char then
+            local humanoid = char:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                if not speedEnabled then humanoid.WalkSpeed = 16 end
+                if not jumpEnabled then humanoid.JumpPower = 50 end
+            end
+        end
+    end
+end
+
+-- 角色重生时清理旧值
+LocalPlayer.CharacterAdded:Connect(function(char)
+    if speedEnabled then
+        task.wait()
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        if hum then hum.WalkSpeed = speedValue end
+    end
+    if jumpEnabled then
+        task.wait()
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        if hum then hum.JumpPower = jumpValue end
+    end
+end)
+
+-- ===== 新增UI: 自瞄 =====
+sectionCommon:Toggle("自瞄（瞄准头部）", false, function(state)
+    aimEnabled = state
+    updateFeatureHeartbeat()
+    Window:Notification("自瞄", state and "已开启" or "已关闭", state and "Success" or "Info", 2)
+end)
+
+-- ===== 新增UI: 改速度 =====
+sectionCommon:Toggle("改速度", false, function(state)
+    speedEnabled = state
+    updateFeatureHeartbeat()
+    Window:Notification("改速度", state and "已开启" or "已关闭", state and "Success" or "Info", 2)
+end)
+
+sectionCommon:Slider("速度数值", 0, 500, 16, function(val)
+    speedValue = val
+    if speedEnabled and LocalPlayer.Character then
+        local hum = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if hum then hum.WalkSpeed = val end
+    end
+end)
+
+-- ===== 新增UI: 改跳跃 =====
+sectionCommon:Toggle("改跳跃", false, function(state)
+    jumpEnabled = state
+    updateFeatureHeartbeat()
+    Window:Notification("改跳跃", state and "已开启" or "已关闭", state and "Success" or "Info", 2)
+end)
+
+sectionCommon:Slider("跳跃高度", 0, 500, 50, function(val)
+    jumpValue = val
+    if jumpEnabled and LocalPlayer.Character then
+        local hum = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if hum then hum.JumpPower = val end
+    end
+end)
+
+-- ===== 原有功能 =====
 sectionCommon:Button("款飞行", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/fhjhcfhhj/probable-happiness/refs/heads/main/README.md"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/fhjhcfhhj/improved-sy/refs/heads/main/%E6%AE%BA%E9%A3%9E%E8%A1%8C.lua"))()
 end)
 
 local noclipEnabled = false
@@ -227,6 +355,10 @@ sectionCommon:Toggle("无敌（可能会失效）", false, function(state)
     loadstring(game:HttpGet('https://pastebin.com/raw/nwGEvkez'))()
 end)
 
+sectionCommon:Toggle("无敌（可能会失效）", false, function(state)
+    loadstring(game:HttpGet('https://pastebin.com/raw/nwGEvkez'))()
+end)
+
 sectionCommon:Button("踏空行走", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
 end)
@@ -238,6 +370,10 @@ sectionCommon:Button("铁拳", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'))()
 end)
 
+sectionCommon:Button("iw指今控制台", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
 sectionCommon:Button("旋转", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/tt/main/%E6%97%8B%E8%BD%AC.lua"))()
 end)
@@ -246,11 +382,23 @@ sectionCommon:Toggle("反挂机", false, function(state)
      loadstring(game:HttpGet("https://pastebin.com/raw/9fFu43FF"))()
 end)
 
+sectionCommon:Button("工具挂", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Bebo-Mods/BeboScripts/main/StandAwekening.lua"))()
+end)
+
 local tabCommon = Window:Tab("娱乐（FE）", "117911709021357")
 local sectionCommon = tabCommon:Section("娱乐功能", {Y = "113580079129703", F = "113580079129703"}, true)
 
 sectionCommon:Button("打人", function()
     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-THE-REAL-dropkick-177199"))() 
+end)
+
+sectionCommon:Button("M 47", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/ak47", true))()
+end)
+
+sectionCommon:Button("电脑键盘", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
 end)
 
 sectionCommon:Button("SCP-096", function()
